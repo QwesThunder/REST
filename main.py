@@ -1145,6 +1145,18 @@ def zneonime():
             'msg': 'input parameter q'
         }
 
+@app.route('/api/userosu', methods=['GET','POST'])
+def userosu():
+    if request.args.get('username'):
+        try:
+            username = request.args.get.('u').replace('@','')
+            osuuser = get('https://osu.ppy.sh/api/get_user?k=9784c28686c9239c7d226b5f9d306d56c9e4e64e&u=%s' % username, headers={'User-Agent':'Mozilla/5.0 (Linux; Android 8.1.0; CPH1909) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.101 Mobile Safari/537.36'}).text, 'html.parser').find('div', class_='user-profile-area')
+            osuuser_ = osuuser['user_id','username','join_date','count300','count100','count50','playcount','ranked_score','total_score','pp_rank','level','pp_raw','accuracy','count_rank_ss','count_rank_ssh','count_rank_s','count_rank_sh','count_rank_a','country','total_seconds_played','pp_country_rank','events']
+            return {
+			'status': 200,
+			'creator':'ZasXCarr',
+			'result':osuuser_
+		}
 @app.route('/api/stalk', methods=['GET','POST'])
 def stalk():
 	if request.args.get('username'):
